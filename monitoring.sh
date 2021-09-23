@@ -6,7 +6,7 @@ get_mem_usage=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)", $3,$2,$3*100/$2 
 get_dis_usage=$(df -h | awk '$NF=="/"{printf "%d/%dGB (%s)", $3,$2,$5}')
 get_cpu_load=$(top -bn1 | grep '^%Cpu' | cut -c 9- | xargs | awk '{printf("%.1f%%"), $1 + $3}')
 get_lb=$(who -b | awk '{print $3" "$4" "$5}')
-get_lvm=$(lsblk |grep lvm | awk '{if ($1) {print "yes";exit;} else {print "no"} }')
+get_lvm=$(lsblk |grep lvm | awk '{if ($1) {print "yes";exit} else {print "no"} }')
 get_co_tcp=$(echo -n $(ss -s | grep 'TCP:' | cut -d '(' -f 2 | cut -d ',' -f 1 | cut -d ' ' -f 2); echo "  ESTABLISHED")
 get_usr_log=$(users | wc -w)
 get_ip=$(hostname -I)
